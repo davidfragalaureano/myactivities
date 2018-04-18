@@ -8,7 +8,7 @@ export class FacebookApiService {
    * variables to connect Facebook applicaton with angular
    */
   private readonly appId:string = '428890384200620';
-  private readonly version: string = 'v2.8';
+  private readonly version: string = 'v2.11';
   /**
    * this component receives a FB API service
     @param FacebookService
