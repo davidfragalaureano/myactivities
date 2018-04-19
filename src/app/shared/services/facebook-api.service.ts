@@ -88,7 +88,7 @@ export class FacebookApiService {
    * return music's  taste user
    */
   public getMusic() :void{
-    this.fb.api('/'+this.getuserID()+'/music')
+    this.fb.api('/'+this.getuserID()+'/music?limit=50')
       .then((res: any) => {
         console.log('Got the users music', res);
       }).catch((error) => {
