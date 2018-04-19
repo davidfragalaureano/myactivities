@@ -8,13 +8,16 @@ import { FacebookApiService } from '../shared/services/facebook-api.service';
 })
 export class InicioComponent implements OnInit {
 
+  public profile:any;
+
   constructor(private facebookAPI: FacebookApiService) { }
   ngOnInit() {}
 
   public loginWithFacebook(): void{
   	 this.facebookAPI.loginWithOptions();
   	 this.facebookAPI.getProfile().then((res: any) => {
-          return res;
+          this.profile  = res;
+          console.log(this.profile);
       }).catch((error) => {
         	return console.error('Error getting profile information',error);
       });
