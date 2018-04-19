@@ -13,6 +13,11 @@ export class InicioComponent implements OnInit {
 
   public loginWithFacebook(): void{
   	 this.facebookAPI.loginWithOptions();
+  	 this.facebookAPI.getProfile().then((res: any) => {
+          return res;
+      }).catch((error) => {
+        	return console.error('Error getting profile information',error);
+      });
   }
 
 }

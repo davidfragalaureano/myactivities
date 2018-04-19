@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import {HttpClientModule} from '@angular/common/http';
 import { FacebookService, InitParams, LoginOptions , LoginResponse} from 'ngx-facebook';
 
 @Injectable()
@@ -57,7 +58,7 @@ export class FacebookApiService {
     const loginOptions: LoginOptions = {
       enable_profile_selector: true,
       return_scopes: true,
-      scope: 'public_profile,user_friends,email,user_location,user_likes,user_photos,user_posts,user_tagged_places,user_videos'
+      scope: 'public_profile,user_friends,email,user_location,user_likes,user_photos,user_posts,user_tagged_places,user_videos,manage_notifications'
     };
 
     this.fb.login(loginOptions)
@@ -74,13 +75,8 @@ export class FacebookApiService {
   /**
    * getting porfile information about user logged 
    */
-  public getProfile() :void{
-    this.fb.api('/me')
-      .then((res: any) => {
-        console.log('Got the users profile', res);
-      }).catch((error) => {
-      		console.error('Error getting profile information',error);
-      });
+  public getProfile() :Promise<any>{
+      return this.fb.api('/me');
     }
 
 
@@ -95,6 +91,31 @@ export class FacebookApiService {
           console.error('Error getting profile information',error);
       });
     }
+
+
+    /**
+   * return unread notifications
+   */
+  public getUnreadNotifications() :void{
+    this.fb.api('/'+this.getuserID()+'/notifications')
+      .then((res: any) => {
+        console.log('Got the users notifications', res);
+      }).catch((error) => {
+          console.error('Error getting profile information',error);
+      });
+    }
+
+    /**
+   * return unread notifications
+   */
+   public getProfilePicture():void{
+     this.fb.api('/'+this.getuserID()+'/profile_pic')
+      .then((res: any) => {
+        console.log('Got the users picture profile', res);
+      }).catch((error) => {
+          console.error('Error getting profile information',error);
+      });
+   }
 
 
    public logOut():void{
