@@ -58,7 +58,7 @@ export class FacebookApiService {
     const loginOptions: LoginOptions = {
       enable_profile_selector: true,
       return_scopes: true,
-      scope: 'public_profile,user_friends,email,user_location,user_likes,user_photos,user_posts,user_tagged_places,user_videos,manage_notifications'
+      scope: 'public_profile,user_friends,email,user_location,user_likes,user_photos,user_posts,user_tagged_places,user_videos'
     };
 
     this.fb.login(loginOptions)
@@ -76,7 +76,7 @@ export class FacebookApiService {
    * getting porfile information about user logged 
    */
   public getProfile() :Promise<any>{
-      return this.fb.api('/me');
+      return this.fb.api('/'+this.getuserID());
     }
 
 
