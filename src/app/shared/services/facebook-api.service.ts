@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, EventEmitter, Input, Output  } from '@angular/core';
 import {HttpClientModule} from '@angular/common/http';
 import { FacebookService, InitParams, LoginOptions , LoginResponse} from 'ngx-facebook';
 
@@ -10,7 +10,8 @@ export class FacebookApiService {
    */
   private readonly appId:string = '428890384200620';
   private readonly version: string = 'v2.11';
-  /**
+  @Output() public logged:any = new EventEmitter();
+  /**boolean
    * this component receives a FB API service
     @param FacebookService
    */
@@ -61,15 +62,15 @@ export class FacebookApiService {
       scope: 'public_profile,user_friends,email,user_location,user_likes,user_photos,user_posts,user_tagged_places,user_videos'
     };
 
-    this.fb.login(loginOptions)
-      .then((res: LoginResponse) => {
-        console.log('Logged in', res);  
-         this.setAccesToken(res.authResponse.accessToken);
-         this.setuserID(res.authResponse.userID);
-         this.getMusic();
-      }).catch((error) => {
-      		console.error('Error logging',error);
-      });
+    this.fb.login(loginOptions).then((res: LoginResponse) => {
+            console.log('Logged in', res);                             
+                 this.setAccesToken(res.authResponse.accessToken);
+                 this.setuserID(res.authResponse.userID);
+                 this.getMusic();  
+                 this.logged.emit({status:res.status});             
+          }).catch((error) => {
+              console.error('Error logging',error);
+          });
   }
 
   /**

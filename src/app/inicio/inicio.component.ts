@@ -14,12 +14,17 @@ export class InicioComponent implements OnInit {
   ngOnInit() {}
 
   public loginWithFacebook(): void{
-  	 this.facebookAPI.loginWithOptions();
-  	 this.facebookAPI.getProfile().then((res: any) => {
+  	 this.facebookAPI.loginWithOptions();  	 		  	
+  }
+
+  public onLogged(status):any{
+  	  this.facebookAPI.getProfile().then((res: any) => {
+  	  	  console.log(status);
           this.profile  = res;
           console.log(this.profile);
       }).catch((error) => {
-        	return console.error('Error getting profile information',error);
+      		console.log(status);
+          console.error('Error getting profile information',error);
       });
   }
 
