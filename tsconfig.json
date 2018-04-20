@@ -1,8 +1,8 @@
 {
   "compileOnSave": false,
   "compilerOptions": {
-    "outDir": "./dist/out-tsc",
-    "sourceMap": true,
+    "outDir": "./dist",
+    "sourceMap": false,
     "sourceRoot": ".",
     "declaration": false,
     "moduleResolution": "node",
@@ -17,5 +17,6 @@
       "dom"
     ]
   },
+   "inlineSources": true,
   "inlineSourceMap": true
 }
