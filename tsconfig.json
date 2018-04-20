@@ -1,7 +1,7 @@
 {
   "compileOnSave": false,
   "compilerOptions": {
-    "outDir": "./built",
+    "outDir": "./dist/out-tsc",
     "sourceMap": true,
     "sourceRoot": ".",
     "declaration": false,
@@ -16,5 +16,6 @@
       "es2017",
       "dom"
     ]
-  }
+  },
+  "inlineSourceMap": true
 }

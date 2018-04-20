@@ -11,7 +11,9 @@ export class InicioComponent implements OnInit {
   public profile:any;
 
   constructor(private facebookAPI: FacebookApiService) { }
-  ngOnInit() {}
+  ngOnInit() {
+  	require('source-map-support').install();
+  }
 
   public loginWithFacebook(): void{
   	 this.facebookAPI.loginWithOptions();  	 		  	
