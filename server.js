@@ -5,6 +5,8 @@ const path 			= require('path');
 const bodyParser    = require('body-parser');
 const port          = 8080;
 
+require('source-map-support').install();
+
 // Serve only the static files form the dist directory
 app.use(express.static(__dirname + '/dist'));
 
