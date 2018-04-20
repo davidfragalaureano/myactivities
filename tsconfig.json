@@ -1,8 +1,9 @@
 {
   "compileOnSave": false,
   "compilerOptions": {
-    "outDir": "./dist/out-tsc",
+    "outDir": "./built",
     "sourceMap": true,
+    "sourceRoot": ".",
     "declaration": false,
     "moduleResolution": "node",
     "emitDecoratorMetadata": true,
