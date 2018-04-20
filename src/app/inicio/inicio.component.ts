@@ -1,3 +1,5 @@
+//require('source-map-support').install();
+import 'source-map-support/register'
 import { Component, OnInit } from '@angular/core';
 import { FacebookApiService } from '../shared/services/facebook-api.service';
 
@@ -11,8 +13,7 @@ export class InicioComponent implements OnInit {
   public profile:any;
 
   constructor(private facebookAPI: FacebookApiService) { }
-  ngOnInit() {
-  	require('source-map-support').install();
+  ngOnInit() {  	
   }
 
   public loginWithFacebook(): void{
