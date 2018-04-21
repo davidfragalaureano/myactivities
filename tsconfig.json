@@ -1,8 +1,8 @@
 {
   "compileOnSave": false,
   "compilerOptions": {
-    "outDir": "./dist",
-    "sourceMap": false,
+    "outDir": "./built",
+    "sourceMap": true,
     "sourceRoot": ".",
     "declaration": false,
     "moduleResolution": "node",
@@ -17,6 +17,4 @@
       "dom"
     ]
   },
-   "inlineSources": true,
-  "inlineSourceMap": true
 }
