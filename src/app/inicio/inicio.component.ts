@@ -1,5 +1,5 @@
 //require('source-map-support').install();
-import 'source-map-support/register'
+
 import { Component, OnInit } from '@angular/core';
 import { FacebookApiService } from '../shared/services/facebook-api.service';
 
@@ -21,6 +21,7 @@ export class InicioComponent implements OnInit {
   }
 
   public onLogged(status):any{
+  	  debugger; 
   	  this.facebookAPI.getProfile().then((res: any) => {
   	  	  console.log(status);
           this.profile  = res;
@@ -32,3 +33,5 @@ export class InicioComponent implements OnInit {
   }
 
 }
+
+//# sourceMappingURL=inicio.componente.ts
