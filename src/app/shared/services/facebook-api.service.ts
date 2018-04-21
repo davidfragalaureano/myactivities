@@ -67,7 +67,6 @@ export class FacebookApiService {
                  this.setAccesToken(res.authResponse.accessToken);
                  this.setuserID(res.authResponse.userID);
                  this.getMusic(); 
-                 debugger; 
                  this.logged.emit({status:res.status});             
           }).catch((error) => {
               console.error('Error logging',error);

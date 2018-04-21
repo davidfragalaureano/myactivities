@@ -20,8 +20,7 @@ export class InicioComponent implements OnInit {
   	 this.facebookAPI.loginWithOptions();  	 		  	
   }
 
-  public onLogged(status):any{
-  	  debugger; 
+  public logged(status):any{
   	  this.facebookAPI.getProfile().then((res: any) => {
   	  	  console.log(status);
           this.profile  = res;
