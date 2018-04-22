@@ -1,5 +1,6 @@
-import { Injectable, EventEmitter, Input, Output  } from '@angular/core';
-import {HttpClientModule} from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { Subject } from 'rxjs/Subject';
+import { HttpClientModule } from '@angular/common/http';
 import { FacebookService, InitParams, LoginOptions , LoginResponse} from 'ngx-facebook';
 
 @Injectable()
@@ -10,7 +11,9 @@ export class FacebookApiService {
    */
   private readonly appId:string = '428890384200620';
   private readonly version: string = 'v2.11';
-  @Output() public logged:any = new EventEmitter();
+  private onLogged: any = new Subject<any>();
+  public onLoggedEvent = this.onLogged.asObservable();
+
   /**boolean
    * this component receives a FB API service
     @param FacebookService
@@ -43,6 +46,15 @@ export class FacebookApiService {
   private setuserID(userID: string): void{
       localStorage.setItem('userID',userID);
   }
+
+
+  public getStatus(): string{
+      return localStorage.getItem('status');
+  }
+
+  private setStatus(status: string): void{
+      localStorage.setItem('status',status);
+  }
   /** 
    * Store access token in local storage
    @param accessToken : token received from the login fb api
@@ -62,16 +74,17 @@ export class FacebookApiService {
       scope: 'public_profile,user_friends,email,user_location,user_likes,user_photos,user_posts,user_tagged_places,user_videos'
     };
 
-    this.fb.login(loginOptions).then((res: LoginResponse) => {
-            console.log('Logged in', res);                             
-                 this.setAccesToken(res.authResponse.accessToken);
-                 this.setuserID(res.authResponse.userID);
-                 this.getMusic(); 
-                 this.logged.emit({status:res.status});             
-          }).catch((error) => {
-              this.logged.emit({status:false});     
-              console.error('Error logging',error);
-          });
+    this.fb.login(loginOptions).then((res: LoginResponse) => {        
+         console.log('Logged in', res);                             
+         this.setAccesToken(res.authResponse.accessToken);
+         this.setuserID(res.authResponse.userID);
+         this.setStatus(res.status); 
+         this.onLogged.next(res.status);
+         // this.getProfile();               
+         // this.getMusic();                  
+     }).catch((error) => {              
+           console.error('Error logging',error);
+     });
   }
 
   /**
@@ -86,8 +99,8 @@ export class FacebookApiService {
    * return music's  taste user
    */
   public getMusic() :void{
-    this.fb.api('/'+this.getuserID()+'/music?limit=50')
-      .then((res: any) => {
+      this.fb.api('/'+this.getuserID()+'/music?limit=50')
+        .then((res: any) => {
         console.log('Got the users music', res);
       }).catch((error) => {
           console.error('Error getting profile information',error);
