@@ -69,6 +69,7 @@ export class FacebookApiService {
                  this.getMusic(); 
                  this.logged.emit({status:res.status});             
           }).catch((error) => {
+              this.logged.emit({status:false});     
               console.error('Error logging',error);
           });
   }

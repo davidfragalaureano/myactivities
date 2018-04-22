@@ -17,18 +17,28 @@ export class InicioComponent implements OnInit {
   }
 
   public loginWithFacebook(): void{
-  	 this.facebookAPI.loginWithOptions();  	 		  	
+  	 this.facebookAPI.loginWithOptions();  	
+  	 this.logged(); 		  	
   }
 
-  public logged(status):any{
-  	  this.facebookAPI.getProfile().then((res: any) => {
-  	  	  console.log(status);
-          this.profile  = res;
-          console.log(this.profile);
-      }).catch((error) => {
-      		console.log(status);
-          console.error('Error getting profile information',error);
-      });
+
+  public logged():any{
+
+  	  this.facebookAPI.logged.suscribe(data => {
+  	  		if(data.status){
+  	  			 this.facebookAPI.getProfile().then((res: any) => {
+			  	  	  console.log(status);
+			          this.profile  = res;
+			          console.log(this.profile);
+			      }).catch((error) => {
+			      		console.log(status);
+			          console.error('Error getting profile information',error);
+			      });
+			  }else{
+			  	console.log('a problem occurs while logging');
+			  }
+  	  });
+  	 
   }
 
 }
