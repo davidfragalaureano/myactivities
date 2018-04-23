@@ -27,7 +27,7 @@ export class InicioComponent implements OnInit {
 
   public onLogged():void{   //on logged we call methods to get USER information
   	  this.loggedSucriber = this.facebookAPI.onLoggedEvent.subscribe((data)=>{
-  	  	if(data.status){
+  	  	if(status === "connected"){
   	  			this.getUserProfile();
   	  			this.getUserMusic();
   	  	}else{
