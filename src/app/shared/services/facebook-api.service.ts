@@ -13,13 +13,16 @@ export class FacebookApiService {
   private readonly version: string = 'v2.11';
   private onLogged: any = new Subject<any>();
   public onLoggedEvent = this.onLogged.asObservable();
+  private scopes:string;
 
   /**boolean
    * this component receives a FB API service
     @param FacebookService
    */
   constructor(private fb: FacebookService) {
-     
+    this.scopes = 'public_profile,user_friends,email,user_location,'+
+                  'user_likes,user_photos,user_posts,user_tagged_places,'+
+                  'user_videos'
     let initParams: InitParams = {
       appId: this.appId,
       xfbml: true,
@@ -71,7 +74,7 @@ export class FacebookApiService {
     const loginOptions: LoginOptions = {
       enable_profile_selector: true,
       return_scopes: true,
-      scope: 'public_profile,user_friends,email,user_location,user_likes,user_photos,user_posts,user_tagged_places,user_videos'
+      scope: this.scopes
     };
 
     this.fb.login(loginOptions).then((res: LoginResponse) => {        
@@ -79,9 +82,7 @@ export class FacebookApiService {
          this.setAccesToken(res.authResponse.accessToken);
          this.setuserID(res.authResponse.userID);
          this.setStatus(res.status); 
-         this.onLogged.next(res.status);
-         // this.getProfile();               
-         // this.getMusic();                  
+         this.onLogged.next(res.status);                
      }).catch((error) => {              
            console.error('Error logging',error);
      });
@@ -94,19 +95,12 @@ export class FacebookApiService {
       return this.fb.api('/'+this.getuserID());
     }
 
-
    /**
    * return music's  taste user
    */
-  public getMusic() :void{
-      this.fb.api('/'+this.getuserID()+'/music?limit=50')
-        .then((res: any) => {
-        console.log('Got the users music', res);
-      }).catch((error) => {
-          console.error('Error getting profile information',error);
-      });
+  public getMusic() :Promise<any>{
+      return this.fb.api('/'+this.getuserID()+'/music?limit=50');       
     }
-
 
     /**
    * return unread notifications
@@ -123,13 +117,8 @@ export class FacebookApiService {
     /**
    * return unread notifications
    */
-   public getProfilePicture():void{
-     this.fb.api('/'+this.getuserID()+'/profile_pic')
-      .then((res: any) => {
-        console.log('Got the users picture profile', res);
-      }).catch((error) => {
-          console.error('Error getting profile information',error);
-      });
+   public getProfilePicture():Promise<any>{ 
+     return this.fb.api('/'+this.getuserID()+'/profile_pic'); 
    }
 
 
@@ -137,7 +126,6 @@ export class FacebookApiService {
      this.fb.logout().then(() => console.log('Logged out!'));
      localStorage.clear();
    }
-
 
 
 }
