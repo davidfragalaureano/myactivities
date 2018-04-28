@@ -26,13 +26,13 @@ export class InicioComponent implements OnInit {
   }
 
   public onLogged():void{   //on logged we call methods to get USER information
-  	  this.loggedSucriber = this.facebookAPI.onLoggedEvent.subscribe((data)=>{
-  	  	if(status === "connected"){
-  	  			this.getUserProfile();
-  	  			this.getUserMusic();
-  	  	}else{
+  	  this.loggedSucriber = this.facebookAPI.onLoggedEvent.subscribe((status)=>{
+	  	  	if(status === "connected"){
+	  	  			this.getUserProfile();
+	  	  			this.getUserMusic();
+	  	  	}else{
 
-  	  	}
+	  	  	}
        });
   }
 
