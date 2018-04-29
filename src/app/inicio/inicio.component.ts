@@ -18,7 +18,7 @@ export class InicioComponent implements OnInit {
   private loggedSucriber: Subscription = null
   public logged: boolean = false;
 
-  @Output() onGetProfile: EventEmitter<any> = new EventEmitter();
+  @Output() onGetProfile = new EventEmitter();
 
   constructor(private facebookAPI: FacebookApiService) { }
   ngOnInit() {}
