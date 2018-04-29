@@ -18,7 +18,7 @@ export class AppComponent {
 		  	type: 'success',
 		  	html:true,
 			width: 600,
-			imageUrl: user_profile.url,
+			imageUrl: user_profile.picture,
 			//background: '#BDBDBD',
 			confirmButtonColor:'#343a40',
 			 footer: '<a href>This site is in development, will be done as soon as posible!</a>',
