@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import swal from 'sweetalert2';
+import { InicioComponent } from './inicio/inicio.component';
 
 
 @Component({
@@ -8,5 +10,16 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'app';
+
+
+ public welcome(dataUser):void{
+  		swal({
+		  	title: "Welcome!, "+ dataUser.name,
+		  	type: 'success',
+			width: 600,
+			background: '#BDBDBD',
+			confirmButtonColor:'#343a40',
+		});	  
+ }
 
 }

@@ -23,11 +23,17 @@ export class InicioComponent implements OnInit {
   constructor(private facebookAPI: FacebookApiService) { }
   ngOnInit() {}
 
+  /**
+   * LOGGIN CALL FUNCTION
+   */
   public loginWithFacebook(): void{
   	 this.facebookAPI.loginWithOptions();
   	 this.onLogged();
   }
 
+/**
+   * CREATE A CUSTOM METHOD WHEN THE USER IS COMPLETELY LOGGED
+   */
   public onLogged():void{   //on logged we call methods to get USER information
   	  this.loggedSucriber = this.facebookAPI.onLoggedEvent.subscribe((status)=>{
 	  	  	if(status === "connected"){	  	
@@ -46,6 +52,10 @@ export class InicioComponent implements OnInit {
        });
   }
 
+
+  /**
+   * GET INFORMATION ABOUT USER USING FB SERVICE METHODS
+   */
   public validateStatus(){
   	if(this.facebookAPI.getStatus() !== "connected"){
   		this.logged = false;
@@ -71,15 +81,6 @@ export class InicioComponent implements OnInit {
        });
   }
 
-  public welcome(event):void{
-  		swal({
-		  	title: "Welcome!, "+ this.profile.name,
-		  	type: 'success',
-			width: 600,
-			background: '#BDBDBD',
-			confirmButtonColor:'#343a40',
-		});	  
-  }
 
   ngOnDestroy(){        
         this.loggedSucriber.unsubscribe();
