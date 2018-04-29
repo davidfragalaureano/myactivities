@@ -9,12 +9,12 @@ import { InicioComponent } from './inicio/inicio.component';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'app';
-
-
+  /**
+   * ON LOGGED, NOTIFY TO USER 
+   */
  public welcome(user_profile:any):void{
   		swal({
-		  	title: "<h1>Welcome!, "+ user_profile.name + '</h1>',
+		  	title: "<h1>Welcome, "+ user_profile.name + '!</h1>',
 		  	type: 'success',
 		  	html:true,
 			width: 600,

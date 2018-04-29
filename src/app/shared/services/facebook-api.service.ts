@@ -117,8 +117,8 @@ export class FacebookApiService {
     /**
    * return unread notifications
    */
-   public getProfilePicture():Promise<any>{ 
-     return this.fb.api('/'+this.getuserID()+'/picture?fields=url&redirect=0'); 
+   public getProfilePicture(size:string):Promise<any>{ 
+     return this.fb.api('/'+this.getuserID()+'/picture?fields=url&redirect=0&type='+size); 
    }
 
 
