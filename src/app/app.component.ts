@@ -17,7 +17,7 @@ export class AppComponent {
 		  	title: "Welcome!, "+ dataUser.name,
 		  	type: 'success',
 			width: 600,
-			background: '#BDBDBD',
+			//background: '#BDBDBD',
 			confirmButtonColor:'#343a40',
 		});	  
  }
