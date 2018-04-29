@@ -14,7 +14,6 @@ export class InicioComponent implements OnInit {
 
   public profile:any;
   public music:any;
-  public profilePicture:any;
   private loggedSucriber: Subscription = null
   public logged: boolean = false;
 
@@ -39,7 +38,7 @@ export class InicioComponent implements OnInit {
 	  	  	if(status === "connected"){	  	
 	  	  		this.getUserProfile();
 	  	  		this.getUserMusic();
-	  	  		//this.getUserProfilePicture();	  	  							  	
+	  	  		this.getUserProfilePicture();	  	  							  	
 	  	  	}else{
 	  	  		swal({
 				  	title: "Sorry, you cannot loggin, try once again.",
@@ -64,8 +63,7 @@ export class InicioComponent implements OnInit {
 
   public getUserProfile(): void{
   	   this.facebookAPI.getProfile().then((profile)=>{
-  	   		this.profile = profile;
-  	   		this.onGetProfile.emit(profile);
+  	   		this.profile = profile;  	   		
        });
   }
 
@@ -77,7 +75,8 @@ export class InicioComponent implements OnInit {
 
   public getUserProfilePicture():void{
   	   this.facebookAPI.getProfilePicture().then((profilePicture)=>{
-  	   		this.profilePicture = profilePicture;
+  	   		this.profile.picture = profilePicture.data.url;
+  	   		this.onGetProfile.emit(this.profile);
        });
   }
 
