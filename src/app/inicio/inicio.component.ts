@@ -33,7 +33,7 @@ export class InicioComponent implements OnInit {
 	  	  	if(status === "connected"){	  	
 	  	  		this.getUserProfile();
 	  	  		this.getUserMusic();
-	  	  		this.getUserProfilePicture();	  	  							  	
+	  	  		//this.getUserProfilePicture();	  	  							  	
 	  	  	}else{
 	  	  		swal({
 				  	title: "Sorry, you cannot loggin, try once again.",
