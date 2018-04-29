@@ -118,7 +118,7 @@ export class FacebookApiService {
    * return unread notifications
    */
    public getProfilePicture():Promise<any>{ 
-     return this.fb.api('/'+this.getuserID()+'/profile_pic'); 
+     return this.fb.api('/'+this.getuserID()+'/picture'); 
    }
 
 

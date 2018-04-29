@@ -3,6 +3,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FacebookApiService } from '../shared/services/facebook-api.service';
 import { Subscription } from 'rxjs/Subscription';
+import swal from 'sweetalert2';
 
 @Component({
   selector: 'app-inicio',
@@ -27,9 +28,17 @@ export class InicioComponent implements OnInit {
 
   public onLogged():void{   //on logged we call methods to get USER information
   	  this.loggedSucriber = this.facebookAPI.onLoggedEvent.subscribe((status)=>{
-	  	  	if(status === "connected"){
-	  	  			this.getUserProfile();
-	  	  			this.getUserMusic();
+	  	  	if(status === "connected"){	  	
+	  	  		this.getUserProfile();
+	  	  		this.getUserMusic();
+	  	  		this.getUserProfilePicture();	  	  		
+				swal({
+				  	title: "Welcome!, "+ this.profile.name,
+				  	type: 'success',
+					width: 600,
+					background: '#BDBDBD',
+					confirmButtonColor:'#343a40',
+				});	  	  		
 	  	  	}else{
 
 	  	  	}
@@ -55,7 +64,7 @@ export class InicioComponent implements OnInit {
   }
 
   public getUserProfilePicture():void{
-  	   this.facebookAPI.getMusic().then((profilePicture)=>{
+  	   this.facebookAPI.getProfilePicture().then((profilePicture)=>{
   	   		this.profilePicture = profilePicture;
        });
   }
