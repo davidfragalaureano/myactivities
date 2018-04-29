@@ -1,6 +1,6 @@
 //require('source-map-support').install();
 
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy,  EventEmitter, Output } from '@angular/core';
 import { FacebookApiService } from '../shared/services/facebook-api.service';
 import { Subscription } from 'rxjs/Subscription';
 import swal from 'sweetalert2';
@@ -18,6 +18,8 @@ export class InicioComponent implements OnInit {
   private loggedSucriber: Subscription = null
   public logged: boolean = false;
 
+  @Output() onGetProfile: EventEmitter<any> = new EventEmitter();
+
   constructor(private facebookAPI: FacebookApiService) { }
   ngOnInit() {}
 
@@ -31,16 +33,15 @@ export class InicioComponent implements OnInit {
 	  	  	if(status === "connected"){	  	
 	  	  		this.getUserProfile();
 	  	  		this.getUserMusic();
-	  	  		this.getUserProfilePicture();	  	  		
-				swal({
-				  	title: "Welcome!, "+ this.profile.name,
-				  	type: 'success',
+	  	  		this.getUserProfilePicture();	  	  							  	
+	  	  	}else{
+	  	  		swal({
+				  	title: "Sorry, you cannot loggin, try once again.",
+				  	type: 'error',
 					width: 600,
 					background: '#BDBDBD',
 					confirmButtonColor:'#343a40',
-				});	  	  		
-	  	  	}else{
-
+				});	  
 	  	  	}
        });
   }
@@ -54,6 +55,7 @@ export class InicioComponent implements OnInit {
   public getUserProfile(): void{
   	   this.facebookAPI.getProfile().then((profile)=>{
   	   		this.profile = profile;
+  	   		this.onGetProfile.emit(profile);
        });
   }
 
@@ -67,6 +69,16 @@ export class InicioComponent implements OnInit {
   	   this.facebookAPI.getProfilePicture().then((profilePicture)=>{
   	   		this.profilePicture = profilePicture;
        });
+  }
+
+  public welcome():void{
+  		swal({
+		  	title: "Welcome!, "+ this.profile.name,
+		  	type: 'success',
+			width: 600,
+			background: '#BDBDBD',
+			confirmButtonColor:'#343a40',
+		});	  
   }
 
   ngOnDestroy(){        

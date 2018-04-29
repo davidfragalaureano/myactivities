@@ -29,8 +29,8 @@
 		 </div>
 	</div>
       <br>
-     <button (click)="loginWithFacebook()"  class="btn btn-md btn-primary btn-block" >
-	     <i class="fab fa-facebook-square" style="color:#4267b2"></i>&nbsp;&nbsp;  Login Facebook  
+     <button (click)="loginWithFacebook()"  (onGetProfile)="welcome()"  class="btn btn-md btn-primary btn-block" >
+	     <i class="fab fa-facebook-square" style="color:#ffffff"></i>&nbsp;&nbsp;  Login with Facebook  
 	  </button>
   </div>
 </div>
