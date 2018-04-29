@@ -45,7 +45,7 @@ export class InicioComponent implements OnInit {
 				  	title: "Sorry, you cannot loggin, try once again.",
 				  	type: 'error',
 					width: 600,
-					background: '#BDBDBD',
+					//background: '#BDBDBD',
 					confirmButtonColor:'#343a40',
 				});	  
 	  	  	}
