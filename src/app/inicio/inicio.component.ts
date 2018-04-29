@@ -71,7 +71,7 @@ export class InicioComponent implements OnInit {
        });
   }
 
-  public welcome():void{
+  public welcome(event):void{
   		swal({
 		  	title: "Welcome!, "+ this.profile.name,
 		  	type: 'success',
